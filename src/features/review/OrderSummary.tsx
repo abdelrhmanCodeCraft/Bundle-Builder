@@ -21,7 +21,7 @@ const OrderSummary = ({
 
         <div className="text-right">
           {shipping > 0 && (
-            <p className="text-danger line-through">
+            <p className="text-gray-500 line-through">
               ${shipping.toFixed(2)}
             </p>
           )}
@@ -35,24 +35,26 @@ const OrderSummary = ({
       {/* Total */}
 
       <div className="flex items-end justify-between">
-        <span className="text-lg font-semibold">
-          Total
-        </span>
+        <img
+          src="/images/Shipping.png"
+          alt="Shipping"
+          className="h-[78px] w-[78px] sm:h-[131px] sm:w-[131px] xl:h-[78px] xl:w-[78px]"
+        />
 
-        <div className="text-right">
-          <p className="text-danger line-through">
+        <span className="text-right">
+          <p className="text-gray-500 line-through">
             ${compareSubtotal.toFixed(2)}
           </p>
 
-          <p className="text-3xl font-bold text-primary">
+          <p className="text-2xl font-bold text-primary">
             ${subtotal.toFixed(2)}
           </p>
-        </div>
+        </span>
       </div>
 
       {/* Savings */}
 
-      <div className="mt-3 rounded bg-[#1DF0BB22] p-2 text-center text-xs font-medium text-[#0AA288]">
+      <div className="mt-3 rounded p-2 text-center text-xs font-medium text-[#0AA288]">
         Congrats! You're saving ${savings.toFixed(2)} on your security bundle!
       </div>
 

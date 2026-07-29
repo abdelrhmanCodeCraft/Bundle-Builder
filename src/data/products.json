@@ -194,6 +194,60 @@
               "stock": 20
             }
           ]
+        },
+        {
+          "id": "leak-sensor",
+          "title": "Leak Sensor",
+          "description": "Detect water leaks before damage happens.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 19.98,
+              "compareAtPrice": null,
+              "image": "/images/Sensors2.png",
+              "stock": 20
+            }
+          ]
+        },
+        {
+          "id": "climate-sensor",
+          "title": "Climate Sensor",
+          "description": "Monitor indoor temperature and humidity.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 26.98,
+              "compareAtPrice": null,
+              "image": "/images/Sensors1.png",
+              "stock": 20
+            }
+          ]
+        },
+        {
+          "id": "keypad",
+          "title": "Keypad",
+          "description": "Quickly arm and disarm your security system.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 39.98,
+              "compareAtPrice": null,
+              "image": "/images/Sensors1.png",
+              "stock": 20
+            }
+          ]
         }
       ]
     },
@@ -236,6 +290,60 @@
               "compareAtPrice": null,
               "image": "/images/accessories1.png",
               "stock": 20
+            }
+          ]
+        },
+        {
+          "id": "battery-pack",
+          "title": "Battery Pack",
+          "description": "Extra backup power for compatible devices.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 29.99,
+              "compareAtPrice": null,
+              "image": "/images/accessories1.png",
+              "stock": 20
+            }
+          ]
+        },
+        {
+          "id": "home-monitoring-hub",
+          "title": "Home Monitoring Hub",
+          "description": "Central hub for all your Wyze security devices.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 59.99,
+              "compareAtPrice": null,
+              "image": "/images/accessories1.png",
+              "stock": 10
+            }
+          ]
+        },
+        {
+          "id": "outdoor-power-adapter",
+          "title": "Outdoor Power Adapter",
+          "description": "Weather-resistant power adapter for outdoor cameras.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 19.99,
+              "compareAtPrice": null,
+              "image": "/images/accessories1.png",
+              "stock": 15
             }
           ]
         }

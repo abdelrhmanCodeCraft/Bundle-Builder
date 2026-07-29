@@ -53,7 +53,7 @@ const ReviewItem = ({
 
       <div className="flex min-w-[70px] flex-col items-end">
         {compareAtPrice && (
-          <span className="text-[12px] text-danger line-through">
+          <span className="text-[12px] text-gray-500 line-through">
             ${compareAtPrice.toFixed(2)}
           </span>
         )}
@@ -62,6 +62,7 @@ const ReviewItem = ({
           ${price.toFixed(2)}
         </span>
       </div>
+      <hr />
     </div>
   );
 };
