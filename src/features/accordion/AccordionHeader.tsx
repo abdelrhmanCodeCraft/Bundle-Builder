@@ -33,12 +33,12 @@ const AccordionHeader = ({
           </span>
 
           <div className="flex items-center gap-2">
-          <span className="text-sm text-text-secondary sm:hidden">
+          <span className="text-sm text-text-primary sm:hidden" style={{ color: "#4e2fd2" }}>
             {selectedCount} selected
           </span>
 
           {isOpen && (
-            <span className="hidden text-sm text-text-secondary sm:block">
+            <span className="hidden text-sm text-text-primary sm:block" style={{ color: "#4e2fd2" }}>
               {selectedCount} selected
             </span>
           )}

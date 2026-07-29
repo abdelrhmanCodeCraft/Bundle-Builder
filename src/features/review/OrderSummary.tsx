@@ -19,7 +19,14 @@ const OrderSummary = ({
       {/* Shipping */}
 
       <div className="mb-4 flex items-center justify-between text-sm">
-        <span>Fast Shipping</span>
+        <div className="flex items-center gap-4">
+          <img
+            src="/icons/Wyze Sense Keypad.svg"
+            alt="Shipping"
+            className="h-[41px] w-[41px] "
+          />
+          <span>Fast Shipping</span>
+        </div>
 
         <div className="text-right">
           {shipping > 0 && (
@@ -43,7 +50,11 @@ const OrderSummary = ({
           className="h-[78px] w-[78px] sm:h-[131px] sm:w-[131px] xl:h-[78px] xl:w-[78px]"
         />
 
-        <span className="text-right">
+        <div>
+          <p className="text-sm px-1 ml-auto  " style={{ width:"fit-content",  backgroundColor: "#4e2fd2", color: "white", borderRadius: "2px", fontSize: "12px" }}>
+            as low as $19.19/mo
+          </p>
+          <span className="text-right flex gap-2 items-center ">
           <p className="text-gray-500 line-through">
             ${compareSubtotal.toFixed(2)}
           </p>
@@ -52,6 +63,7 @@ const OrderSummary = ({
             ${subtotal.toFixed(2)}
           </p>
         </span>
+        </div>
       </div>
 
       {/* Savings */}
@@ -63,8 +75,9 @@ const OrderSummary = ({
       {/* Checkout */}
 
       <button
+      style={{ backgroundColor: "#4e2fd2" }}
         className="
-          mt-4
+          mt-1
           h-12
           w-full
           rounded-md
@@ -81,7 +94,7 @@ const OrderSummary = ({
       <button
         onClick={onSave}
         className="
-          mt-3
+          mt-1
           w-full
           text-center
           text-sm
