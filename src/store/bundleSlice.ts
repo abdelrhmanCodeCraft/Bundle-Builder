@@ -41,6 +41,9 @@ const initialState: BundleState = {
   quantities: {
     "wyze-cam-v4-white": 1,
     "wyze-cam-pan-v3-white": 2,
+    "entry-sensor-default": 1,
+    "motion-sensor-default": 1,
+    "wyze-solar-panel-default": 1,
   },
 };
 

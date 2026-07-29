@@ -37,6 +37,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <article
       className={`
+        w-[130px]
         rounded-card
         border-2
         p-[11px]
@@ -48,9 +49,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
         }
       `}
     >
-      <div className="flex h-full items-center gap-[13px]">
-        {/* Left */}
-        <div className="flex w-[110px] shrink-0 flex-col items-center justify-center">
+      <div className="flex flex-col items-center gap-2 text-center">
+        {/* Top: badge + image */}
+        <div className="flex w-full flex-col items-center">
           {product.badge && (
             <span className="mb-2 w-fit rounded-full bg-primary px-2 py-1 text-[11px] text-white">
               {product.badge.text}
@@ -64,8 +65,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
           />
         </div>
 
-        {/* Right */}
-        <div className="flex min-w-0 flex-1 flex-col justify-center">
+        {/* Bottom: details */}
+        <div className="flex w-full flex-col items-center">
           <h3 className="text-[16px] text-text-heading">
             {product.title}
           </h3>
@@ -82,7 +83,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </p>
 
           {product.variants.length > 1 && (
-            <div className="">
+            <div className="flex justify-center">
               <VariantSelector
                 variants={product.variants}
                 selectedVariantId={activeVariant.id}
@@ -98,7 +99,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div>
           )}
 
-          <div className="mt-1 flex items-center justify-between">
+          <div className="mt-1 flex flex-col items-center gap-2">
             <QuantityStepper
               value={quantity}
               onIncrement={() =>
@@ -120,7 +121,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               }
             />
 
-            <div className="flex flex-col items-end self-center text-right">
+            <div className="flex flex-col items-center">
               {activeVariant.compareAtPrice && (
                 <span className="text-[16px] font-normal leading-none tracking-[0.6px] text-danger line-through">
                   ${activeVariant.compareAtPrice.toFixed(2)}

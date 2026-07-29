@@ -18,7 +18,7 @@ const ReviewPlan = ({
   price,
 }: ReviewPlanProps) => {
   return (
-    <section className="mt-4">
+    <section className="mt-4 border-t border-[#CED6DE] pt-4">
       <div className="flex items-start justify-between">
         {/* Left */}
         <div>

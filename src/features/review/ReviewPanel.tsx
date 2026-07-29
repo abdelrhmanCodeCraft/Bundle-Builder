@@ -110,11 +110,13 @@ const ReviewPanel = () => {
       <ReviewSection
         title="Sensors"
         items={mapItems(sensors)}
+        withDivider
       />
 
       <ReviewSection
         title="Accessories"
         items={mapItems(accessories)}
+        withDivider
       />
 
       <ReviewPlan
