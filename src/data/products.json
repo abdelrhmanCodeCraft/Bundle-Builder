@@ -151,19 +151,96 @@
       "expandedByDefault": false,
       "products": []
     },
-    {
+
+
+   {
       "id": 3,
       "title": "Choose your sensors",
       "category": "sensors",
       "expandedByDefault": false,
-      "products": []
+      "products": [
+        {
+          "id": "entry-sensor",
+          "title": "Entry Sensor v2",
+          "description": "Detects when doors or windows open.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 23.98,
+              "compareAtPrice": null,
+              "image": "/images/Sensors1.png",
+              "stock": 20
+            }
+          ]
+        },
+        {
+          "id": "motion-sensor",
+          "title": "Motion Sensor",
+          "description": "Detect motion inside your home.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 29.98,
+              "compareAtPrice": null,
+              "image": "/images/Sensors2.png",
+              "stock": 20
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 4,
       "title": "Add extra protection",
       "category": "accessories",
       "expandedByDefault": false,
-      "products": []
+      "products": [
+        {
+          "id": "wyze-solar-panel",
+          "title": "Wyze Solar Panel",
+          "description": "Keep your battery cameras charged longer.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 24.99,
+              "compareAtPrice": null,
+              "image": "/images/accessories1.png",
+              "stock": 15
+            }
+          ]
+        },
+        {
+          "id": "micro-sd-card",
+          "title": "MicroSD Card",
+          "description": "Local continuous recording.",
+          "badge": null,
+          "learnMore": "#",
+          "hasVariants": false,
+          "variants": [
+            {
+              "id": "default",
+              "label": "Default",
+              "price": 15.99,
+              "compareAtPrice": null,
+              "image": "/images/accessories1.png",
+              "stock": 20
+            }
+          ]
+        }
+        
+      ]
     }
   ]
 }

@@ -1,5 +1,5 @@
 import Builder from "../components/layout/Builder";
-import ReviewPanel from "../components/layout/ReviewPanel";
+import RenderPanel from "../components/layout/RenderPanel";
 
 const Home = () => {
   return (
@@ -19,7 +19,7 @@ const Home = () => {
         "
       >
           <Builder />
-          <ReviewPanel />
+          <RenderPanel />
       </section>
     </main>
   );
