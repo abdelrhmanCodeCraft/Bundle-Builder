@@ -1,75 +1,71 @@
-# React + TypeScript + Vite
+# Bundle Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A two-column, data-driven bundle builder: a 4-step accordion for assembling a
+home security system on the left, with a live order-review panel on the right
+that stays in sync as selections change.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + TypeScript, built with Vite
+- Redux Toolkit for bundle state (selected variants and quantities)
+- Tailwind CSS for styling
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open the printed local URL (defaults to `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Other scripts:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run build    # type-check and produce a production build in dist/
+npm run preview  # serve the production build locally
+npm run lint     # run eslint
 ```
+
+## Data
+
+All products, steps, and pricing live in `src/data/products.json` — nothing
+is hardcoded per-product in the components. Each step lists its products;
+each product optionally carries a discount badge and a list of variants
+(color/label/price/stock). The plan shown in the review panel is described
+by the top-level `plan` entry in the same file.
+
+## How selections work
+
+- `src/store/bundleSlice.ts` tracks the active variant per product and a
+  quantity per `productId-variantId` pair, so two variants of the same
+  product (e.g. Red vs. Blue) keep independent counts.
+- The product card's stepper always reflects the *currently active* variant
+  for that product; switching variants swaps which count the stepper shows,
+  without touching the other variant's quantity.
+- The review panel (`src/store/selectors.ts`) reads from the same state, so
+  it lists every variant with a quantity above zero as its own line, and
+  both quantity steppers (card and review line) update each other since
+  they dispatch the same actions.
+
+## Persistence
+
+Clicking "Save my system for later" writes the current bundle state to
+`localStorage` (`src/store/persist.ts`). On load, the store checks
+`localStorage` first and hydrates from it if a saved system exists, so a
+reload or return visit restores exactly what was saved. Regular browsing
+without hitting Save does not persist — the save is an explicit action, not
+autosave.
+
+## Known gaps / tradeoffs
+
+- The "Choose your plan" step currently has no selectable product cards —
+  the plan itself only appears as a fixed line in the review panel, sourced
+  from `products.json`. Building out an actual plan-selection card was left
+  out rather than guessed at without the Figma reference in hand.
+- The review panel doesn't yet include the satisfaction-guarantee badge or
+  the financing line shown in the design; skipped for the same reason
+  (didn't want to invent copy/iconography that might not match the source
+  design).
+- No backend — `products.json` is served as a static local file, which the
+  brief calls out as an acceptable option.

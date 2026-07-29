@@ -4,7 +4,6 @@ type AccordionHeaderProps = {
   step: Step;
   isOpen: boolean;
   selectedCount: number;
-  isMobile: boolean;
   onToggle: () => void;
 };
 
@@ -12,11 +11,8 @@ const AccordionHeader = ({
   step,
   isOpen,
   selectedCount,
-  isMobile,
   onToggle,
 }: AccordionHeaderProps) => {
-  const showSelectedCount = isMobile || isOpen;
-
   return (
     <button
       type="button"
