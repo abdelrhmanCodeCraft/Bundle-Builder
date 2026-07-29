@@ -73,7 +73,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <p className="mt-1 text-[12px] leading-[130%] text-text-secondary">
             {product.description}
             <a
-              href="#"
+              href={product.learnMore}
               className=" text-[14px] text-primary hover:underline"
               style={{ color: "#4e2fd2", textDecoration: "underline" }}
             >

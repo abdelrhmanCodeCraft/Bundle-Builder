@@ -3,6 +3,7 @@ type OrderSummaryProps = {
   compareSubtotal: number;
   shipping: number;
   savings: number;
+  onSave: () => void;
 };
 
 const OrderSummary = ({
@@ -10,6 +11,7 @@ const OrderSummary = ({
   compareSubtotal,
   shipping,
   savings,
+  onSave,
 }: OrderSummaryProps) => {
   return (
     <div className="mt-6 border-t pt-4">
@@ -77,6 +79,7 @@ const OrderSummary = ({
       </button>
 
       <button
+        onClick={onSave}
         className="
           mt-3
           w-full

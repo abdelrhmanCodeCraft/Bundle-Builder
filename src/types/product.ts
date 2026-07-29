@@ -20,8 +20,17 @@ export interface Product {
   title: string;
   description: string;
   badge: Badge | null;
-  actionLink: string;
+  learnMore: string;
+  hasVariants: boolean;
   variants: Variant[];
+}
+
+export interface PlanData {
+  id: string;
+  title: string;
+  highlightedText?: string;
+  price: number;
+  compareAtPrice?: number;
 }
 
 export interface Step {
@@ -34,6 +43,7 @@ export interface Step {
 
 export interface ProductsData {
   steps: Step[];
+  plan: PlanData;
 }
 
 export interface SelectedVariant {

@@ -137,7 +137,7 @@
               "label": "Black",
               "price": 89.98,
               "compareAtPrice": null,
-              "image": " /images/cam5var1.png ",
+              "image": "/images/cam5var1.png",
               "stock": 5
             }
           ]
@@ -350,5 +350,12 @@
         
       ]
     }
-  ]
+  ],
+  "plan": {
+    "id": "cam-unlimited",
+    "title": "Cam Unlimited",
+    "highlightedText": "Unlimited",
+    "price": 9.99,
+    "compareAtPrice": 12.99
+  }
 }

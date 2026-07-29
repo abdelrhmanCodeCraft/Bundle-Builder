@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-interface BundleState {
+export interface BundleState {
   /**
    * Currently selected variant for every product.
    *

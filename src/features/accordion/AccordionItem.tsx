@@ -1,6 +1,7 @@
 import AccordionHeader from "./AccordionHeader";
 import AccordionContent from "./AccordionContent";
 
+import { useAppSelector } from "../../store/hooks";
 import type { Step } from "../../types/product";
 
 type AccordionItemProps = {
@@ -20,6 +21,15 @@ const AccordionItem = ({
   onToggle,
   onNext,
 }: AccordionItemProps) => {
+  const selectedCount = useAppSelector((state) =>
+    step.products.filter((product) =>
+      product.variants.some(
+        (variant) =>
+          (state.bundle.quantities[`${product.id}-${variant.id}`] ?? 0) > 0
+      )
+    ).length
+  );
+
   return (
     <article
       className={`
@@ -33,6 +43,7 @@ const AccordionItem = ({
       <AccordionHeader
         step={step}
         isOpen={isOpen}
+        selectedCount={selectedCount}
         onToggle={onToggle}
       />
 

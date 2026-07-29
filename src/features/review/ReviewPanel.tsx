@@ -5,6 +5,8 @@ import {
   increaseQuantity,
 } from "../../store/bundleSlice";
 
+import { savePersistedState } from "../../store/persist";
+
 import {
   getItemsByCategory,
   getSubtotal,
@@ -12,12 +14,16 @@ import {
   getSavings,
 } from "../../store/selectors";
 
+import productsData from "../../data/products.json";
+
 import ReviewSection from "./ReviewSection";
 import OrderSummary from "./OrderSummary";
 import ReviewPlan from "./ReviewPlan";
 
 const ReviewPanel = () => {
   const dispatch = useAppDispatch();
+
+  const bundleState = useAppSelector((state) => state.bundle);
 
   const cameras = useAppSelector((state) =>
     getItemsByCategory(state, "cameras")
@@ -130,10 +136,10 @@ const ReviewPanel = () => {
             <path d="M12 22V2" />
           </svg>
         }
-        name="Cam Unlimited"
-        highlightedText="Unlimited"
-        compareAtPrice={12.99}
-        price={9.99}
+        name={productsData.plan.title}
+        highlightedText={productsData.plan.highlightedText}
+        compareAtPrice={productsData.plan.compareAtPrice}
+        price={productsData.plan.price}
       />
 
       <ReviewSection
@@ -146,6 +152,7 @@ const ReviewPanel = () => {
         compareSubtotal={compareSubtotal}
         savings={savings}
         shipping={5.99}
+        onSave={() => savePersistedState(bundleState)}
       />
     </aside>
   );
