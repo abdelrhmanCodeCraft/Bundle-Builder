@@ -16,16 +16,22 @@ type Item = {
 type ReviewSectionProps = {
   title: string;
   items: Item[];
+  withDivider?: boolean;
 };
 
 const ReviewSection = ({
   title,
   items,
+  withDivider,
 }: ReviewSectionProps) => {
   if (!items.length) return null;
 
   return (
-    <section className="mt-5">
+    <section
+      className={`mt-5 ${
+        withDivider ? "border-t border-[#CED6DE] pt-5" : ""
+      }`}
+    >
       <h3 className="mb-2 text-[11px] uppercase tracking-wide text-text-label">
         {title}
       </h3>
