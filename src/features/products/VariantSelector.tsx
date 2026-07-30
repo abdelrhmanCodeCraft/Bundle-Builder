@@ -12,7 +12,7 @@ const VariantSelector = ({
   onChange,
 }: VariantSelectorProps) => {
   return (
-    <div className="mt-3 flex flex-wrap gap-2">
+    <div className="mt-3 flex flex-wrap gap-1 desktop:gap-2">
       {variants.map((variant) => {
         const isActive = variant.id === selectedVariantId;
 
@@ -31,10 +31,10 @@ const VariantSelector = ({
             <img
               src={variant.image}
               alt={variant.label}
-              className="h-5 w-5 object-contain"
+              className="h-4 w-4 object-contain desktop:h-5 desktop:w-5"
             />
 
-            <span className="text-xs font-medium">
+            <span className="text-[11px] font-medium desktop:text-xs">
               {variant.label}
             </span>
           </button>

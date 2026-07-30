@@ -12,9 +12,9 @@ const ProductGrid = ({
     <div
       className="
         grid
-        grid-cols-[repeat(auto-fit,minmax(140px,1fr))]
+        grid-cols-[repeat(auto-fit,minmax(200px,1fr))]
         gap-4
-        xl:grid-cols-2
+        desktop:grid-cols-2
       "
     >
       {products.map((product) => (
