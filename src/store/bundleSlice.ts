@@ -26,6 +26,12 @@ export interface BundleState {
    * }
    */
   quantities: Record<string, number>;
+
+  /**
+   * The chosen subscription plan, or null when none is selected. A single id
+   * rather than a map, since only one plan can be active at a time.
+   */
+  selectedPlanId: string | null;
 }
 
 const initialState: BundleState = {
@@ -45,6 +51,9 @@ const initialState: BundleState = {
     "motion-sensor-default": 1,
     "wyze-solar-panel-default": 1,
   },
+
+  // Initial plan exactly like the design
+  selectedPlanId: "cam-unlimited",
 };
 
 const bundleSlice = createSlice({
@@ -107,6 +116,15 @@ const bundleSlice = createSlice({
       state.quantities[key] = currentQuantity - 1;
     },
 
+    selectPlan: (
+      state,
+      action: PayloadAction<{
+        planId: string;
+      }>
+    ) => {
+      state.selectedPlanId = action.payload.planId;
+    },
+
     resetBundle: () => initialState,
   },
 });
@@ -115,6 +133,7 @@ export const {
   changeVariant,
   increaseQuantity,
   decreaseQuantity,
+  selectPlan,
   resetBundle,
 } = bundleSlice.actions;
 

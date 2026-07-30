@@ -63,7 +63,11 @@ const parseBundle = (value: unknown): BundleState | undefined => {
     }
   }
 
-  return { activeVariants, quantities };
+  // Anything that isn't a plan id reads as "no plan selected", which is valid.
+  const selectedPlanId =
+    typeof value.selectedPlanId === "string" ? value.selectedPlanId : null;
+
+  return { activeVariants, quantities, selectedPlanId };
 };
 
 export const loadBundle = (): BundleState | undefined => {

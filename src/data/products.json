@@ -149,7 +149,27 @@
       "title": "Choose your plan",
       "category": "plan",
       "expandedByDefault": false,
-      "products": []
+      "products": [],
+      "plans": [
+        {
+          "id": "cam-plus-lite",
+          "title": "Cam Plus Lite",
+          "description": "Person detection and 12-second event clips for a single camera.",
+          "price": 1.99
+        },
+        {
+          "id": "cam-plus",
+          "title": "Cam Plus",
+          "description": "Unlimited clip length plus person, package and vehicle detection.",
+          "price": 4.99
+        },
+        {
+          "id": "cam-unlimited",
+          "title": "Cam Unlimited",
+          "description": "Everything in Cam Plus, for every camera in your system.",
+          "price": 9.99
+        }
+      ]
     },
 
 

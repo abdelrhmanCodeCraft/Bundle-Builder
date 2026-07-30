@@ -1,14 +1,19 @@
-import type { Product } from "../../types/product";
+import type { Step } from "../../types/product";
 import ProductGrid from "../products/ProductGrid";
+import PlanGrid from "../plans/PlanGrid";
 
 type AccordionContentProps = {
-  products: Product[];
+  step: Step;
 };
 
-const AccordionContent = ({ products }: AccordionContentProps) => {
+const AccordionContent = ({ step }: AccordionContentProps) => {
   return (
     <div className="px-[15px] pb-[15px]">
-      <ProductGrid products={products} />
+      {step.plans ? (
+        <PlanGrid plans={step.plans} />
+      ) : (
+        <ProductGrid products={step.products} />
+      )}
     </div>
   );
 };

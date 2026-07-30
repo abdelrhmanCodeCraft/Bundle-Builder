@@ -33,12 +33,24 @@ export interface PlanData {
   compareAtPrice?: number;
 }
 
+/**
+ * A subscription option in the "Choose your plan" step. Plans carry no
+ * variants, quantity or stock — only one can be active at a time.
+ */
+export interface PlanOption {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+}
+
 export interface Step {
   id: number;
   title: string;
   category: string;
   expandedByDefault: boolean;
   products: Product[];
+  plans?: PlanOption[];
 }
 
 export interface SummaryData {

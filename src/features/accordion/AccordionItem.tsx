@@ -21,13 +21,18 @@ const AccordionItem = ({
   onToggle,
   onNext,
 }: AccordionItemProps) => {
+  // The plan step counts its single selection; every other step counts products.
   const selectedCount = useAppSelector((state) =>
-    step.products.filter((product) =>
-      product.variants.some(
-        (variant) =>
-          (state.bundle.quantities[`${product.id}-${variant.id}`] ?? 0) > 0
-      )
-    ).length
+    step.plans
+      ? state.bundle.selectedPlanId
+        ? 1
+        : 0
+      : step.products.filter((product) =>
+          product.variants.some(
+            (variant) =>
+              (state.bundle.quantities[`${product.id}-${variant.id}`] ?? 0) > 0
+          )
+        ).length
   );
 
   return (
@@ -59,7 +64,7 @@ const AccordionItem = ({
           }
         `}
       >
-        <AccordionContent products={step.products} />
+        <AccordionContent step={step} />
 
         {!isLast && (
           <div className="px-[15px] pb-[15px] flex justify-center w-full">
