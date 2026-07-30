@@ -9,9 +9,10 @@ const ProductGrid = ({
   products,
 }: ProductGridProps) => {
   /*
-    Flex rather than grid below the desktop breakpoint: a grid drops the
-    leftover cards of a wrapped row into its first columns, so a partial row
-    sits against the left edge. Flex lets `justify-center` centre it.
+    Flex rather than grid at every width: a grid drops the leftover cards of a
+    wrapped row into its first columns, so a partial row sits against the left
+    edge with the empty tracks trailing it. Flex lets `justify-center` centre
+    it. The cards decide how many fit per row via their flex-basis.
   */
   return (
     <div
@@ -20,8 +21,6 @@ const ProductGrid = ({
         flex-wrap
         justify-center
         gap-4
-        desktop:grid
-        desktop:grid-cols-2
       "
     >
       {products.map((product) => (

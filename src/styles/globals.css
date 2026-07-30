@@ -126,3 +126,33 @@ svg {
   margin-inline: auto;
 }
 
+/*
+  Product card sizing inside the wrapping, centred flex row (gap: 16px, so a
+  half-gap of 8px per card).
+
+  Written as plain media queries rather than Tailwind variants on purpose. Two
+  complementary variants (`max-[1679px]` / `desktop:`) leave a sub-pixel dead
+  zone at the boundary where neither matches and the cards fall back to content
+  width, and a custom breakpoint doesn't reliably outrank a built-in one such as
+  `sm:`. Here the cascade order is explicit: the widest query wins.
+*/
+.product-card {
+  flex-grow: 1;
+  flex-basis: 200px;
+}
+
+/* Once two cards fit per row, cap them so a wrapped row has room to centre. */
+@media (min-width: 450px) {
+  .product-card {
+    max-width: 280px;
+  }
+}
+
+/* Desktop: exactly two per row, so a wrapped third still centres. */
+@media (min-width: 1680px) {
+  .product-card {
+    flex-basis: calc(50% - 8px);
+    max-width: calc(50% - 8px);
+  }
+}
+
