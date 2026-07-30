@@ -5,6 +5,7 @@ type OrderSummaryProps = {
   compareSubtotal: number;
   shipping: number;
   savings: number;
+  financingPerMonth: number;
   onSave: () => boolean;
 };
 
@@ -13,6 +14,7 @@ const OrderSummary = ({
   compareSubtotal,
   shipping,
   savings,
+  financingPerMonth,
   onSave,
 }: OrderSummaryProps) => {
   const [saveResult, setSaveResult] = useState<"idle" | "saved" | "failed">(
@@ -72,7 +74,7 @@ const OrderSummary = ({
 
         <div>
           <p className="text-sm px-1 ml-auto  " style={{ width:"fit-content",  backgroundColor: "#4e2fd2", color: "white", borderRadius: "2px", fontSize: "12px" }}>
-            as low as $19.19/mo
+            as low as ${financingPerMonth.toFixed(2)}/mo
           </p>
           <span className="text-right flex gap-2 items-center ">
           <p className="text-gray-500 line-through">

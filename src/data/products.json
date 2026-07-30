@@ -4,6 +4,7 @@
       "id": 1,
       "title": "Choose your cameras",
       "category": "cameras",
+      "icon": "/icons/icon-camera.svg",
       "expandedByDefault": true,
       "products": [
         {
@@ -148,6 +149,7 @@
       "id": 2,
       "title": "Choose your plan",
       "category": "plan",
+      "icon": "/icons/icon3.svg",
       "expandedByDefault": false,
       "products": [],
       "plans": [
@@ -155,28 +157,31 @@
           "id": "cam-plus-lite",
           "title": "Cam Plus Lite",
           "description": "Person detection and 12-second event clips for a single camera.",
-          "price": 1.99
+          "price": 1.99,
+          "highlightedText": "Plus Lite"
         },
         {
           "id": "cam-plus",
           "title": "Cam Plus",
           "description": "Unlimited clip length plus person, package and vehicle detection.",
-          "price": 4.99
+          "price": 4.99,
+          "highlightedText": "Plus"
         },
         {
           "id": "cam-unlimited",
           "title": "Cam Unlimited",
           "description": "Everything in Cam Plus, for every camera in your system.",
-          "price": 9.99
+          "price": 9.99,
+          "highlightedText": "Unlimited",
+          "compareAtPrice": 12.99
         }
       ]
     },
-
-
-   {
+    {
       "id": 3,
       "title": "Choose your sensors",
       "category": "sensors",
+      "icon": "/icons/icon2.svg",
       "expandedByDefault": false,
       "products": [
         {
@@ -275,6 +280,7 @@
       "id": 4,
       "title": "Add extra protection",
       "category": "accessories",
+      "icon": "/icons/icon1.svg",
       "expandedByDefault": false,
       "products": [
         {
@@ -367,20 +373,12 @@
             }
           ]
         }
-        
       ]
     }
   ],
-  "plan": {
-    "id": "cam-unlimited",
-    "title": "Cam Unlimited",
-    "highlightedText": "Unlimited",
-    "price": 9.99,
-    "compareAtPrice": 12.99
-  },
   "summary": {
     "shipping": 5.99,
-    "financingMonths": 12,
+    "financingPerMonth": 19.19,
     "guaranteeTitle": "30-day hassle-free returns",
     "guaranteeDescription": "If you're not totally in love with the product, we will refund you 100%."
   }

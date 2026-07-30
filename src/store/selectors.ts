@@ -1,7 +1,19 @@
 import productsData from "../data/products.json";
 
 import type { RootState } from "./index";
-import type { Product, Variant } from "../types/product";
+import type { PlanOption, Product, Variant } from "../types/product";
+
+const allPlans: PlanOption[] = productsData.steps.flatMap(
+  (step) => step.plans ?? []
+);
+
+/** The plan the shopper picked in step 2, or null when none is selected. */
+export const getSelectedPlan = (
+  state: RootState
+): PlanOption | null =>
+  allPlans.find(
+    (plan) => plan.id === state.bundle.selectedPlanId
+  ) ?? null;
 
 export interface SelectedReviewItem {
   id: string;
