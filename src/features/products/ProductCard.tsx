@@ -37,7 +37,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <article
       className={`
-        w-[130px]
+        w-full
         rounded-card
         border-2
         p-[11px]
@@ -49,9 +49,32 @@ const ProductCard = ({ product }: ProductCardProps) => {
         }
       `}
     >
-      <div className="flex flex-col items-center gap-2 text-center">
-        {/* Top: badge + image */}
-        <div className="flex w-full flex-col items-center">
+      <div
+        className="
+          flex
+          flex-col
+          items-center
+          gap-2
+          text-center
+          xl:h-full
+          xl:flex-row
+          xl:items-center
+          xl:gap-[13px]
+          xl:text-left
+        "
+      >
+        {/* Image (top on tablet/mobile, left on desktop) */}
+        <div
+          className="
+            flex
+            w-full
+            flex-col
+            items-center
+            xl:w-[110px]
+            xl:shrink-0
+            xl:justify-center
+          "
+        >
           {product.badge && (
             <span className="mb-2 w-fit rounded-full bg-primary px-2 py-1 text-[11px] text-white">
               {product.badge.text}
@@ -65,8 +88,19 @@ const ProductCard = ({ product }: ProductCardProps) => {
           />
         </div>
 
-        {/* Bottom: details */}
-        <div className="flex w-full flex-col items-center">
+        {/* Details (bottom on tablet/mobile, right on desktop) */}
+        <div
+          className="
+            flex
+            w-full
+            flex-col
+            items-center
+            xl:min-w-0
+            xl:flex-1
+            xl:items-stretch
+            xl:justify-center
+          "
+        >
           <h3 className="text-[16px] text-text-heading">
             {product.title}
           </h3>
@@ -83,7 +117,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </p>
 
           {product.variants.length > 1 && (
-            <div className="flex justify-center">
+            <div className="flex justify-center xl:justify-start">
               <VariantSelector
                 variants={product.variants}
                 selectedVariantId={activeVariant.id}
@@ -99,7 +133,19 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div>
           )}
 
-          <div className="mt-1 flex flex-col items-center gap-2">
+          <div
+            className="
+              mt-1
+              flex
+              flex-col
+              items-center
+              gap-2
+              xl:flex-row
+              xl:items-center
+              xl:justify-between
+              xl:gap-0
+            "
+          >
             <QuantityStepper
               value={quantity}
               onIncrement={() =>
@@ -121,7 +167,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               }
             />
 
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center xl:items-end xl:self-center xl:text-right">
               {activeVariant.compareAtPrice && (
                 <span className="text-[16px] font-normal leading-none tracking-[0.6px] text-danger line-through">
                   ${activeVariant.compareAtPrice.toFixed(2)}
