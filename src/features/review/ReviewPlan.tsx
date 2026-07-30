@@ -17,6 +17,10 @@ const ReviewPlan = ({
   compareAtPrice,
   price,
 }: ReviewPlanProps) => {
+  const baseName = highlightedText
+    ? name.replace(highlightedText, "").trim()
+    : name;
+
   return (
     <section className="mt-4 border-t border-[#CED6DE] pt-4">
       <div className="flex items-start justify-between">
@@ -30,10 +34,15 @@ const ReviewPlan = ({
             {icon}
 
             <div className="text-[14px] font-bold">
-              <span>{name} </span>
+              {/*
+                The highlighted words are the tail of the title, so strip them
+                before printing the rest — otherwise "Cam Unlimited" with a
+                highlight of "Unlimited" renders as "Cam Unlimited Unlimited".
+              */}
+              <span>{baseName} </span>
 
               {highlightedText && (
-                <span className="font-bold text-primary font-bold">
+                <span className="font-bold text-primary">
                   {highlightedText}
                 </span>
               )}

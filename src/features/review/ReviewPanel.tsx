@@ -12,6 +12,7 @@ import {
   getSubtotal,
   getCompareSubtotal,
   getSavings,
+  getSelectedPlan,
 } from "../../store/selectors";
 
 import productsData from "../../data/products.json";
@@ -47,6 +48,8 @@ const ReviewPanel = () => {
     useAppSelector(getCompareSubtotal);
 
   const savings = useAppSelector(getSavings);
+
+  const selectedPlan = useAppSelector(getSelectedPlan);
 
   const mapItems = (
     items: typeof cameras,
@@ -119,9 +122,10 @@ const ReviewPanel = () => {
         withDivider
       />
 
-      <ReviewPlan
-        title="Plan"
-        icon={
+      {selectedPlan && (
+        <ReviewPlan
+          title="Plan"
+          icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -135,14 +139,15 @@ const ReviewPanel = () => {
             className="text-primary"
           >
             <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-            <path d="M12 22V2" />
-          </svg>
-        }
-        name={productsData.plan.title}
-        highlightedText={productsData.plan.highlightedText}
-        compareAtPrice={productsData.plan.compareAtPrice}
-        price={productsData.plan.price}
-      />
+              <path d="M12 22V2" />
+            </svg>
+          }
+          name={selectedPlan.title}
+          highlightedText={selectedPlan.highlightedText}
+          compareAtPrice={selectedPlan.compareAtPrice}
+          price={selectedPlan.price}
+        />
+      )}
 
       <ReviewSection
         title="Plan"
@@ -153,7 +158,8 @@ const ReviewPanel = () => {
         subtotal={subtotal}
         compareSubtotal={compareSubtotal}
         savings={savings}
-        shipping={5.99}
+        shipping={productsData.summary.shipping}
+        financingPerMonth={productsData.summary.financingPerMonth}
         onSave={() => saveBundle(bundleState)}
       />
     </aside>

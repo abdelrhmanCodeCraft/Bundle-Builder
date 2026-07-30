@@ -51,9 +51,18 @@ const AccordionHeader = ({
       <div className="mt-3 h-px w-full bg-[#1F1F1F]" />
 
       <div className="px-[15px] py-[15px] flex items-center justify-between">
-        <h2 className="text-[18px] sm:text-[22px] text-text-primary">
-          {step.title}
-        </h2>
+        <div className="flex items-center gap-3">
+          <img
+            src={step.icon}
+            alt=""
+            aria-hidden="true"
+            className="h-[30px] w-[30px] shrink-0"
+          />
+
+          <h2 className="text-[18px] sm:text-[22px] text-text-primary">
+            {step.title}
+          </h2>
+        </div>
         <svg
             className={`transition-transform duration-300 ${
               isOpen ? "rotate-180" : ""

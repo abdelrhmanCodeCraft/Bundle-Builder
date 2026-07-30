@@ -14,13 +14,14 @@ import {
   getSubtotal,
   getCompareSubtotal,
   getSavings,
+  getSelectedPlan,
 } from "../../store/selectors";
 
 import productsData from "../../data/products.json";
 
 import QuantityStepper from "../products/QuantityStepper";
 
-const { plan, summary } = productsData;
+const { summary } = productsData;
 
 /**
  * The review panel as it appears below the `desktop` breakpoint: the builder
@@ -107,6 +108,8 @@ const ReviewPanelTablet = () => {
   const compareSubtotal = useAppSelector(getCompareSubtotal);
   const savings = useAppSelector(getSavings);
 
+  const plan = useAppSelector(getSelectedPlan);
+
   const [saveResult, setSaveResult] = useState<"idle" | "saved" | "failed">(
     "idle"
   );
@@ -156,11 +159,10 @@ const ReviewPanelTablet = () => {
     }));
 
   // "Cam Unlimited" renders as "Cam" + a highlighted "Unlimited", per the design.
-  const planName = plan.highlightedText
-    ? plan.title.replace(plan.highlightedText, "").trim()
-    : plan.title;
-
-  const perMonth = subtotal / summary.financingMonths;
+  const planName =
+    plan && plan.highlightedText
+      ? plan.title.replace(plan.highlightedText, "").trim()
+      : plan?.title;
 
   return (
     <div className="p-5 sm:p-6">
@@ -181,6 +183,7 @@ const ReviewPanelTablet = () => {
           <RowGroup title="Accessories" rows={toRows(accessories)} />
 
           {/* Plan */}
+          {plan && (
           <section className="mt-4 pt-4">
             <Divider />
 
@@ -222,6 +225,7 @@ const ReviewPanelTablet = () => {
               </div>
             </div>
           </section>
+          )}
 
           {/* Shipping */}
           <section className="mt-4 pt-4">
@@ -285,7 +289,7 @@ const ReviewPanelTablet = () => {
 
           <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
             <span className="rounded-[4px] bg-primary px-3 py-[6px] text-[13px] font-medium text-white">
-              as low as ${perMonth.toFixed(2)}/mo
+              as low as ${summary.financingPerMonth.toFixed(2)}/mo
             </span>
 
             <div className="flex items-baseline gap-2">
