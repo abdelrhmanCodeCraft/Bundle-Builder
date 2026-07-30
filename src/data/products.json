@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Choose your cameras",
       "category": "cameras",
-      "icon": "/icons/icon-camera.svg",
+      "icon": "/icons/icon1.svg",
       "expandedByDefault": true,
       "products": [
         {
@@ -149,7 +149,7 @@
       "id": 2,
       "title": "Choose your plan",
       "category": "plan",
-      "icon": "/icons/icon3.svg",
+      "icon": "/icons/icon2.svg",
       "expandedByDefault": false,
       "products": [],
       "plans": [
@@ -181,7 +181,7 @@
       "id": 3,
       "title": "Choose your sensors",
       "category": "sensors",
-      "icon": "/icons/icon2.svg",
+      "icon": "/icons/icon3.svg",
       "expandedByDefault": false,
       "products": [
         {
@@ -280,7 +280,7 @@
       "id": 4,
       "title": "Add extra protection",
       "category": "accessories",
-      "icon": "/icons/icon1.svg",
+      "icon": "/icons/icon4.svg",
       "expandedByDefault": false,
       "products": [
         {

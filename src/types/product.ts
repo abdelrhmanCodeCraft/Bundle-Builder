@@ -25,14 +25,7 @@ export interface Product {
   variants: Variant[];
 }
 
-/**
- * A subscription option in the "Choose your plan" step. Plans carry no
- * variants, quantity or stock — only one can be active at a time.
- *
- * `highlightedText` is the trailing part of the title the review panel prints
- * in the primary colour; `compareAtPrice` is the struck-through price, present
- * only on tiers that are discounted.
- */
+
 export interface PlanOption {
   id: string;
   title: string;

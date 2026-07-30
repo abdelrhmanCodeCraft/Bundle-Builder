@@ -2,40 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface BundleState {
-  /**
-   * Currently selected variant for every product.
-   *
-   * Example:
-   * {
-   *   "wyze-cam-v4": "white",
-   *   "wyze-cam-pan-v3": "black"
-   * }
-   */
+
   activeVariants: Record<string, string>;
 
-  /**
-   * Quantity of every variant.
-   *
-   * Key format:
-   * `${productId}-${variantId}`
-   *
-   * Example:
-   * {
-   *   "wyze-cam-v4-white": 2,
-   *   "wyze-cam-v4-black": 1
-   * }
-   */
+
   quantities: Record<string, number>;
 
-  /**
-   * The chosen subscription plan, or null when none is selected. A single id
-   * rather than a map, since only one plan can be active at a time.
-   */
+
   selectedPlanId: string | null;
 }
 
 const initialState: BundleState = {
-  // Initial selected variant exactly like the design
   activeVariants: {
     "wyze-cam-v4": "white",
     "wyze-cam-pan-v3": "white",
@@ -43,7 +20,6 @@ const initialState: BundleState = {
     "wyze-battery-cam-pro": "white",
   },
 
-  // Initial quantities exactly like the design
   quantities: {
     "wyze-cam-v4-white": 1,
     "wyze-cam-pan-v3-white": 2,
@@ -52,7 +28,6 @@ const initialState: BundleState = {
     "wyze-solar-panel-default": 1,
   },
 
-  // Initial plan exactly like the design
   selectedPlanId: "cam-unlimited",
 };
 

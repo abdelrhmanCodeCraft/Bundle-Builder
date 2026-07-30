@@ -21,7 +21,6 @@ const OrderSummary = ({
     "idle"
   );
 
-  // Let the link fall back to its normal label a moment after confirming.
   useEffect(() => {
     if (saveResult === "idle") return;
 
@@ -29,7 +28,6 @@ const OrderSummary = ({
     return () => clearTimeout(timer);
   }, [saveResult]);
 
-  // Kept short so the link stays on one line and the panel doesn't shift.
   const saveLabel = {
     idle: "Save my system for later",
     saved: "Saved for later!",
@@ -38,7 +36,6 @@ const OrderSummary = ({
   return (
     <div className="mt-6 border-t pt-4">
 
-      {/* Shipping */}
 
       <div className="mb-4 flex items-center justify-between text-sm">
         <div className="flex items-center gap-4">
@@ -63,7 +60,6 @@ const OrderSummary = ({
         </div>
       </div>
 
-      {/* Total */}
 
       <div className="flex items-end justify-between">
         <img
@@ -88,13 +84,11 @@ const OrderSummary = ({
         </div>
       </div>
 
-      {/* Savings */}
 
       <div className="mt-3 rounded p-2 text-center text-xs font-medium text-[#0AA288]">
         Congrats! You're saving ${savings.toFixed(2)} on your security bundle!
       </div>
 
-      {/* Checkout */}
 
       <button
       style={{ backgroundColor: "#4e2fd2" }}

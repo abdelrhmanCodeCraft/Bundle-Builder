@@ -1,35 +1,8 @@
 @import "tailwindcss";
 
-/* ===========================
-   Fonts
-=========================== */
 
-/*
-@font-face {
-  font-family: "Gilroy";
-  src: url("../assets/fonts/Gilroy-Regular.woff2") format("woff2");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Gilroy";
-  src: url("../assets/fonts/Gilroy-Medium.woff2") format("woff2");
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: "Gilroy";
-  src: url("../assets/fonts/Gilroy-SemiBold.woff2") format("woff2");
-  font-weight: 600;
-}
-*/
-
-/* ===========================
-   Theme
-=========================== */
 
 @theme {
-  /* Colors */
   --color-primary: #4e2fd2;
 
   --color-bg: #ffffff;
@@ -49,11 +22,6 @@
 
   --container-width: 1196px;
 
-  /*
-    The builder and the review panel only sit side by side from here up. Below
-    it the page stacks and the review panel switches to its wider tablet
-    layout, so `desktop:` reads as "the two-column desktop composition".
-  */
   --breakpoint-desktop: 1680px;
 
   --radius-card: 10px;
@@ -126,29 +94,18 @@ svg {
   margin-inline: auto;
 }
 
-/*
-  Product card sizing inside the wrapping, centred flex row (gap: 16px, so a
-  half-gap of 8px per card).
 
-  Written as plain media queries rather than Tailwind variants on purpose. Two
-  complementary variants (`max-[1679px]` / `desktop:`) leave a sub-pixel dead
-  zone at the boundary where neither matches and the cards fall back to content
-  width, and a custom breakpoint doesn't reliably outrank a built-in one such as
-  `sm:`. Here the cascade order is explicit: the widest query wins.
-*/
 .product-card {
   flex-grow: 1;
   flex-basis: 200px;
 }
 
-/* Once two cards fit per row, cap them so a wrapped row has room to centre. */
 @media (min-width: 450px) {
   .product-card {
     max-width: 280px;
   }
 }
 
-/* Desktop: exactly two per row, so a wrapped third still centres. */
 @media (min-width: 1680px) {
   .product-card {
     flex-basis: calc(50% - 8px);

@@ -61,7 +61,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           desktop:gap-[13px]
         "
       >
-        {/* Image (top on tablet/mobile, left on desktop) */}
         <div
           className="
             flex
@@ -87,7 +86,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           />
         </div>
 
-        {/* Details (bottom on tablet/mobile, right on desktop) */}
         <div
           className="
             flex
@@ -130,11 +128,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div>
           )}
 
-          {/*
-            Pinned to the bottom of the card so the stepper and price sit on a
-            shared line across the row, however tall the copy above them runs.
-            Wraps only if a card gets narrow enough that both can't fit.
-          */}
+
           <div
             className="
               mt-auto

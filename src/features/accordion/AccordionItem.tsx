@@ -21,7 +21,6 @@ const AccordionItem = ({
   onToggle,
   onNext,
 }: AccordionItemProps) => {
-  // The plan step counts its single selection; every other step counts products.
   const selectedCount = useAppSelector((state) =>
     step.plans
       ? state.bundle.selectedPlanId

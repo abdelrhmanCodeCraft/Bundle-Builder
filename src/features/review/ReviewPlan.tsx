@@ -34,11 +34,7 @@ const ReviewPlan = ({
             {icon}
 
             <div className="text-[14px] font-bold">
-              {/*
-                The highlighted words are the tail of the title, so strip them
-                before printing the rest — otherwise "Cam Unlimited" with a
-                highlight of "Unlimited" renders as "Cam Unlimited Unlimited".
-              */}
+
               <span>{baseName} </span>
 
               {highlightedText && (

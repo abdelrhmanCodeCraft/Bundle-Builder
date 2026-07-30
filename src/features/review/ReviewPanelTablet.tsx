@@ -23,12 +23,7 @@ import QuantityStepper from "../products/QuantityStepper";
 
 const { summary } = productsData;
 
-/**
- * The review panel as it appears below the `desktop` breakpoint: the builder
- * has stacked, so the panel gets the full width and splits into line items on
- * the left and the order summary on the right. The desktop composition lives
- * in ReviewPanel and is untouched by this file.
- */
+
 
 type Row = {
   id: string;
@@ -127,7 +122,6 @@ const ReviewPanelTablet = () => {
     failed: "Couldn't save — storage blocked",
   }[saveResult];
 
-  // The design prices each line by quantity rather than showing the unit price.
   const toRows = (items: typeof cameras): Row[] =>
     items.map((item) => ({
       id: item.id,
@@ -158,7 +152,6 @@ const ReviewPanelTablet = () => {
         ),
     }));
 
-  // "Cam Unlimited" renders as "Cam" + a highlighted "Unlimited", per the design.
   const planName =
     plan && plan.highlightedText
       ? plan.title.replace(plan.highlightedText, "").trim()
@@ -167,7 +160,6 @@ const ReviewPanelTablet = () => {
   return (
     <div className="p-5 sm:p-6">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
-        {/* Line items */}
         <div>
           <h2 className="text-[22px] font-semibold text-text-heading">
             Your security system
@@ -182,7 +174,6 @@ const ReviewPanelTablet = () => {
           <RowGroup title="Sensors" rows={toRows(sensors)} />
           <RowGroup title="Accessories" rows={toRows(accessories)} />
 
-          {/* Plan */}
           {plan && (
           <section className="mt-4 pt-4">
             <Divider />
@@ -227,7 +218,6 @@ const ReviewPanelTablet = () => {
           </section>
           )}
 
-          {/* Shipping */}
           <section className="mt-4 pt-4">
             <Divider />
 
@@ -267,7 +257,6 @@ const ReviewPanelTablet = () => {
           </section>
         </div>
 
-        {/* Order summary */}
         <div>
           <div className="flex items-start gap-4">
             <img
@@ -308,10 +297,6 @@ const ReviewPanelTablet = () => {
             bundle!
           </p>
 
-          {/*
-            Set inline because the unlayered `button { background: transparent }`
-            reset in globals.css outranks Tailwind's layered bg-* utility.
-          */}
           <button
             style={{ backgroundColor: "var(--color-primary)" }}
             className="

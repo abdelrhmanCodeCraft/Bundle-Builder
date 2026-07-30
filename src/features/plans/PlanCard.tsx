@@ -15,12 +15,7 @@ const PlanCard = ({ plan }: PlanCardProps) => {
   );
 
   return (
-    /*
-      Border and background are set inline because the unlayered
-      `button { border: none; background: transparent }` reset in globals.css
-      outranks Tailwind's layered utilities — the same reason the accordion's
-      Next button and the variant chips do it this way.
-    */
+
     <button
       type="button"
       onClick={() => dispatch(selectPlan({ planId: plan.id }))}
@@ -48,7 +43,6 @@ const PlanCard = ({ plan }: PlanCardProps) => {
           {plan.title}
         </h3>
 
-        {/* Radio-style marker, to read as a single choice rather than a toggle */}
         <span
           aria-hidden="true"
           className="mt-[3px] flex h-[16px] w-[16px] shrink-0 items-center justify-center rounded-full"

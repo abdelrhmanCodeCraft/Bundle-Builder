@@ -2,11 +2,7 @@ type QuantityStepperProps = {
   value: number;
   onIncrement: () => void;
   onDecrement: () => void;
-  /**
-   * Tighter footprint for the product cards below the desktop breakpoint,
-   * where the stepper shares a line with the price inside a narrow card.
-   * Callers that leave it off keep the standard size at every width.
-   */
+
   compact?: boolean;
 };
 
