@@ -50,12 +50,25 @@ by the top-level `plan` entry in the same file.
 
 ## Persistence
 
-Clicking "Save my system for later" writes the current bundle state to
-`localStorage` (`src/store/persist.ts`). On load, the store checks
-`localStorage` first and hydrates from it if a saved system exists, so a
-reload or return visit restores exactly what was saved. Regular browsing
-without hitting Save does not persist — the save is an explicit action, not
-autosave.
+`src/store/storage.ts` owns reading and writing the configuration;
+`src/store/index.ts` hydrates the store from it on load and subscribes to
+persist on every change. So the system survives a reload or a return visit
+however the shopper leaves the page — not only when they remember to click
+the link. "Save my system for later" still performs an explicit save and
+confirms it, which is the visible affordance the brief asks for.
+
+Two things worth noting:
+
+- The stored value is validated on read rather than trusted. `preloadedState`
+  replaces a slice's initial state outright instead of merging into it, so a
+  blob with a drifted shape would otherwise leave `quantities` undefined and
+  take the render down. Anything unreadable is discarded in favour of the
+  seeded defaults, and the key is versioned so a blob from an older build is
+  ignored and cleaned up.
+- `localStorage` genuinely throws in some contexts (a `file://` page, a
+  sandboxed iframe, Safari private mode). Storage is probed once on startup;
+  if it isn't usable the app still runs and the link reports that it couldn't
+  save instead of silently doing nothing.
 
 ## Known gaps / tradeoffs
 

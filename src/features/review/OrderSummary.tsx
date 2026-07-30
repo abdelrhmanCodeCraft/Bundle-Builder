@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
+
 type OrderSummaryProps = {
   subtotal: number;
   compareSubtotal: number;
   shipping: number;
   savings: number;
-  onSave: () => void;
+  onSave: () => boolean;
 };
 
 const OrderSummary = ({
@@ -13,6 +15,24 @@ const OrderSummary = ({
   savings,
   onSave,
 }: OrderSummaryProps) => {
+  const [saveResult, setSaveResult] = useState<"idle" | "saved" | "failed">(
+    "idle"
+  );
+
+  // Let the link fall back to its normal label a moment after confirming.
+  useEffect(() => {
+    if (saveResult === "idle") return;
+
+    const timer = setTimeout(() => setSaveResult("idle"), 2500);
+    return () => clearTimeout(timer);
+  }, [saveResult]);
+
+  // Kept short so the link stays on one line and the panel doesn't shift.
+  const saveLabel = {
+    idle: "Save my system for later",
+    saved: "Saved for later!",
+    failed: "Couldn't save — storage blocked",
+  }[saveResult];
   return (
     <div className="mt-6 border-t pt-4">
 
@@ -79,7 +99,7 @@ const OrderSummary = ({
       </button>
 
       <button
-        onClick={onSave}
+        onClick={() => setSaveResult(onSave() ? "saved" : "failed")}
         className="
           mt-3
           w-full
@@ -90,7 +110,7 @@ const OrderSummary = ({
           underline
         "
       >
-        Save my system for later
+        {saveLabel}
       </button>
     </div>
   );
