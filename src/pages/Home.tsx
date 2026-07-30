@@ -14,7 +14,7 @@ const Home = () => {
           lg:px-8
           grid
           grid-cols-1
-          xl:grid-cols-[768px_399px]
+          desktop:grid-cols-[768px_399px]
           gap-[29px]
         "
       >

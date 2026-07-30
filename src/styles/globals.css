@@ -49,6 +49,13 @@
 
   --container-width: 1196px;
 
+  /*
+    The builder and the review panel only sit side by side from here up. Below
+    it the page stacks and the review panel switches to its wider tablet
+    layout, so `desktop:` reads as "the two-column desktop composition".
+  */
+  --breakpoint-desktop: 1680px;
+
   --radius-card: 10px;
 
   --default-transition-duration: 300ms;

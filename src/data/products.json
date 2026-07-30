@@ -357,5 +357,11 @@
     "highlightedText": "Unlimited",
     "price": 9.99,
     "compareAtPrice": 12.99
+  },
+  "summary": {
+    "shipping": 5.99,
+    "financingMonths": 12,
+    "guaranteeTitle": "30-day hassle-free returns",
+    "guaranteeDescription": "If you're not totally in love with the product, we will refund you 100%."
   }
 }

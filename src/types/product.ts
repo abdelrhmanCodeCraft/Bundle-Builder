@@ -41,9 +41,17 @@ export interface Step {
   products: Product[];
 }
 
+export interface SummaryData {
+  shipping: number;
+  financingMonths: number;
+  guaranteeTitle: string;
+  guaranteeDescription: string;
+}
+
 export interface ProductsData {
   steps: Step[];
   plan: PlanData;
+  summary: SummaryData;
 }
 
 export interface SelectedVariant {
