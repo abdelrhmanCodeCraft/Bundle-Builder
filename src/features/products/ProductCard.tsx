@@ -52,15 +52,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <div
         className="
           flex
+          h-full
           flex-col
-          items-center
           gap-2
-          text-center
-          xl:h-full
-          xl:flex-row
-          xl:items-center
-          xl:gap-[13px]
-          xl:text-left
+          text-left
+          desktop:flex-row
+          desktop:items-center
+          desktop:gap-[13px]
         "
       >
         {/* Image (top on tablet/mobile, left on desktop) */}
@@ -69,10 +67,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
             flex
             w-full
             flex-col
-            items-center
-            xl:w-[110px]
-            xl:shrink-0
-            xl:justify-center
+            items-start
+            desktop:w-[110px]
+            desktop:shrink-0
+            desktop:items-center
+            desktop:justify-center
           "
         >
           {product.badge && (
@@ -84,7 +83,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <img
             src={activeVariant.image}
             alt={product.title}
-            className="h-[90px] w-full object-contain"
+            className="h-[110px] w-full object-contain desktop:h-[90px]"
           />
         </div>
 
@@ -93,12 +92,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
           className="
             flex
             w-full
+            flex-1
             flex-col
-            items-center
-            xl:min-w-0
-            xl:flex-1
-            xl:items-stretch
-            xl:justify-center
+            desktop:min-w-0
+            desktop:justify-center
           "
         >
           <h3 className="text-[16px] text-text-heading">
@@ -117,7 +114,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </p>
 
           {product.variants.length > 1 && (
-            <div className="flex justify-center xl:justify-start">
+            <div className="flex justify-start">
               <VariantSelector
                 variants={product.variants}
                 selectedVariantId={activeVariant.id}
@@ -133,20 +130,28 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div>
           )}
 
+          {/*
+            Pinned to the bottom of the card so the stepper and price sit on a
+            shared line across the row, however tall the copy above them runs.
+            Wraps only if a card gets narrow enough that both can't fit.
+          */}
           <div
             className="
-              mt-1
+              mt-auto
               flex
-              flex-col
+              flex-wrap
               items-center
+              justify-between
               gap-2
-              xl:flex-row
-              xl:items-center
-              xl:justify-between
-              xl:gap-0
+              pt-2
+              desktop:mt-1
+              desktop:flex-nowrap
+              desktop:gap-0
+              desktop:pt-0
             "
           >
             <QuantityStepper
+              compact
               value={quantity}
               onIncrement={() =>
                 dispatch(
@@ -167,14 +172,25 @@ const ProductCard = ({ product }: ProductCardProps) => {
               }
             />
 
-            <div className="flex flex-col items-center xl:items-end xl:self-center xl:text-right">
+            <div
+              className="
+                flex
+                items-baseline
+                gap-2
+                desktop:flex-col
+                desktop:items-end
+                desktop:gap-0
+                desktop:self-center
+                desktop:text-right
+              "
+            >
               {activeVariant.compareAtPrice && (
-                <span className="text-[16px] font-normal leading-none tracking-[0.6px] text-danger line-through">
+                <span className="text-[13px] font-normal leading-none tracking-[0.6px] text-danger line-through desktop:text-[16px]">
                   ${activeVariant.compareAtPrice.toFixed(2)}
                 </span>
               )}
 
-              <span className="mt-1 text-[16px] font-normal leading-none tracking-[0.6px] text-text-primary">
+              <span className="text-[13px] font-normal leading-none tracking-[0.6px] text-text-primary desktop:mt-1 desktop:text-[16px]">
                 ${activeVariant.price.toFixed(2)}
               </span>
             </div>
