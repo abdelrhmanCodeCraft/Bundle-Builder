@@ -5,7 +5,7 @@ import {
   increaseQuantity,
 } from "../../store/bundleSlice";
 
-import { savePersistedState } from "../../store/persist";
+import { saveBundle } from "../../store/storage";
 
 import {
   getItemsByCategory,
@@ -154,7 +154,7 @@ const ReviewPanel = () => {
         compareSubtotal={compareSubtotal}
         savings={savings}
         shipping={5.99}
-        onSave={() => savePersistedState(bundleState)}
+        onSave={() => saveBundle(bundleState)}
       />
     </aside>
   );
