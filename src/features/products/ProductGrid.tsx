@@ -8,12 +8,19 @@ type ProductGridProps = {
 const ProductGrid = ({
   products,
 }: ProductGridProps) => {
+  /*
+    Flex rather than grid below the desktop breakpoint: a grid drops the
+    leftover cards of a wrapped row into its first columns, so a partial row
+    sits against the left edge. Flex lets `justify-center` centre it.
+  */
   return (
     <div
       className="
-        grid
-        grid-cols-[repeat(auto-fit,minmax(200px,1fr))]
+        flex
+        flex-wrap
+        justify-center
         gap-4
+        desktop:grid
         desktop:grid-cols-2
       "
     >

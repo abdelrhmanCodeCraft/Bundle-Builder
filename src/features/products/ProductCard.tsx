@@ -37,7 +37,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <article
       className={`
-        w-full
+        grow
+        basis-[200px]
+        min-[450px]:max-[1679px]:max-w-[280px]
         rounded-card
         border-2
         p-[11px]
