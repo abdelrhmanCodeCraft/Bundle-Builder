@@ -1,84 +1,58 @@
-# Bundle Builder
+Bundle Builder
+A four-step builder for putting together a home security system, with a summary panel that updates live as you configure it.
 
-A two-column, data-driven bundle builder: a 4-step accordion for assembling a
-home security system on the left, with a live order-review panel on the right
-that stays in sync as selections change.
-
-## Stack
-
-- React 19 + TypeScript, built with Vite
-- Redux Toolkit for bundle state (selected variants and quantities)
-- Tailwind CSS for styling
-
-## Getting started
-
-```bash
 npm install
 npm run dev
-```
+Runs on http://localhost:5173. npm run build for a production build, npm run preview to serve that build, npm run lint for eslint.
 
-Then open the printed local URL (defaults to `http://localhost:5173`).
+Stack
+React 19, TypeScript, Vite. Redux Toolkit for state, Tailwind v4 for styling. Nothing else at runtime.
 
-Other scripts:
+Where things live
+src/
+  data/products.json   all product, plan and copy data
+  store/               slice, selectors, localStorage
+  features/
+    accordion/         the 4-step shell
+    products/          product cards, variant chips, quantity stepper
+    plans/             step 2
+    review/            the summary panel, in two layouts
+Everything renders from products.json. There's no per-product markup anywhere, so adding a camera to the JSON gets you a card with the right badge, chips and pricing without touching a component.
 
-```bash
-npm run build    # type-check and produce a production build in dist/
-npm run preview  # serve the production build locally
-npm run lint     # run eslint
-```
+How the variant tracking works
+This was the part worth getting right, so it's worth a paragraph.
 
-## Data
+Quantities are keyed by productId-variantId, and the active variant per product is kept separately:
 
-All products, steps, and pricing live in `src/data/products.json` — nothing
-is hardcoded per-product in the components. Each step lists its products;
-each product optionally carries a discount badge and a list of variants
-(color/label/price/stock). The plan shown in the review panel is described
-by the top-level `plan` entry in the same file.
+quantities:     { "wyze-cam-v4-white": 1, "wyze-cam-v4-grey": 2 }
+activeVariants: { "wyze-cam-v4": "grey" }
+The card's stepper reads whichever variant is active, so switching from Grey to White swaps what the stepper shows without touching Grey's count. The review panel walks the same map and lists every variant above zero, which is why you can legitimately end up with two "Wyze Cam v4" lines. Both steppers dispatch the same two actions, so they can't drift apart. There's no second source of truth to keep in step.
 
-## How selections work
+Persistence
+"Save my system for later" writes to localStorage and the link tells you whether it actually worked. The store also saves on every change, so a configuration survives a reload even if you never click it. That was deliberate. The brief only asks for the link, but quietly losing someone's work because they didn't press a button seemed worse than the alternative.
 
-- `src/store/bundleSlice.ts` tracks the active variant per product and a
-  quantity per `productId-variantId` pair, so two variants of the same
-  product (e.g. Red vs. Blue) keep independent counts.
-- The product card's stepper always reflects the *currently active* variant
-  for that product; switching variants swaps which count the stepper shows,
-  without touching the other variant's quantity.
-- The review panel (`src/store/selectors.ts`) reads from the same state, so
-  it lists every variant with a quantity above zero as its own line, and
-  both quantity steppers (card and review line) update each other since
-  they dispatch the same actions.
+Two notes on it:
 
-## Persistence
+What comes out of storage is validated, not trusted. preloadedState replaces a slice's initial state rather than merging into it, so a saved blob with the wrong shape leaves a map undefined and takes the render down with it. Anything unreadable is discarded and the defaults load instead.
+The key is versioned (bundle-builder:v1), so a save written by an older build is ignored rather than misread.
+Responsive
+Desktop matches the Figma. The builder and the panel sit side by side from 1680px up; below that the page stacks and the summary switches to a wider two-column layout. That breakpoint is custom (--breakpoint-desktop) rather than a Tailwind default, because the desktop columns are fixed at 768px + 399px.
 
-`src/store/storage.ts` owns reading and writing the configuration;
-`src/store/index.ts` hydrates the store from it on load and subscribes to
-persist on every change. So the system survives a reload or a return visit
-however the shopper leaves the page — not only when they remember to click
-the link. "Save my system for later" still performs an explicit save and
-confirms it, which is the visible affordance the brief asks for.
+Product cards are a wrapping flex row that stays centered when it wraps: five across on a wide screen, down to one on a phone. Their sizing lives in plain media queries in globals.css instead of Tailwind variants, for two reasons I found the hard way. A custom breakpoint doesn't reliably outrank a built-in one like sm:, and complementary max-/min- variants leave a sub-pixel gap at the boundary where neither matches and the cards collapse to content width.
 
-Two things worth noting:
+Decisions and tradeoffs
+Two review panel components. Desktop and tablet differ enough (content moves between columns, the shipping row relocates, prices switch from unit to line totals) that responsive classes on a single tree stopped being readable. Both render and one is hidden by CSS, which does mean duplicate steppers in the DOM. I'd revisit that if this were shipping.
 
-- The stored value is validated on read rather than trusted. `preloadedState`
-  replaces a slice's initial state outright instead of merging into it, so a
-  blob with a drifted shape would otherwise leave `quantities` undefined and
-  take the render down. Anything unreadable is discarded in favour of the
-  seeded defaults, and the key is versioned so a blob from an older build is
-  ignored and cleaned up.
-- `localStorage` genuinely throws in some contexts (a `file://` page, a
-  sandboxed iframe, Safari private mode). Storage is probed once on startup;
-  if it isn't usable the app still runs and the link reports that it couldn't
-  save instead of silently doing nothing.
+Plans aren't products. No variants, no quantity, no stock, so PlanCard is its own component rather than a branch inside ProductCard. The selection is a single id in the store, which makes "only one at a time" structural instead of a rule to enforce.
 
-## Known gaps / tradeoffs
+The plan price is not in the total. A monthly subscription and a one-time hardware total felt like different numbers. Arguable either way; it's a small change in selectors.ts.
 
-- The "Choose your plan" step currently has no selectable product cards —
-  the plan itself only appears as a fixed line in the review panel, sourced
-  from `products.json`. Building out an actual plan-selection card was left
-  out rather than guessed at without the Figma reference in hand.
-- The review panel doesn't yet include the satisfaction-guarantee badge or
-  the financing line shown in the design; skipped for the same reason
-  (didn't want to invent copy/iconography that might not match the source
-  design).
-- No backend — `products.json` is served as a static local file, which the
-  brief calls out as an acceptable option.
+A few buttons set their border and background inline. There's a button { border: none; background: transparent } reset in globals.css that outranks Tailwind's utilities, so bg-primary silently does nothing on a button. Inline was the smaller of the two fixes.
+
+No backend. The JSON is a static import. The bonus wasn't worth the setup for a prototype this size.
+
+Not finished
+The stepper's minus button is styled as disabled at quantity 1 to match the design, but still works, so appearance and behavior disagree.
+Nothing signals that you've hit a product's stock limit. The reducer just stops incrementing.
+src/App.css is left over from the Vite template and isn't imported.
+Checkout is a placeholder, as the brief allows.
